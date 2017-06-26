@@ -1,5 +1,5 @@
 /*
- * GPIO driver for NCT5104D 
+ * GPIO driver for NCT5104D
  *
  * Author: Tasanakorn Phaipool <tasanakorn@gmail.com>
  *
@@ -33,7 +33,8 @@
 #define SIO_LOCK_KEY		0xAA	/* Key to disable Super-I/O */
 
 #define SIO_NCT5104D_ID					0x1061	/* Chip ID */
-#define SIO_PCENGINES_APU_NCT5104D_ID	0xc452	/* Chip ID */
+#define SIO_PCENGINES_APU_NCT5104D_ID_B	0xc452	/* Chip ID */
+#define SIO_PCENGINES_APU_NCT5104D_ID_C	0xc453	/* Chip ID */
 
 enum chips { nct5104d };
 
@@ -290,7 +291,7 @@ static int nct5104d_gpio_probe(struct platform_device *pdev)
 err_gpiochip:
 	for (i = i - 1; i >= 0; i--) {
 		struct nct5104d_gpio_bank *bank = &data->bank[i];
-		
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3,18,0)
 		int rm_err = gpiochip_remove(&bank->chip);
 		if (rm_err < 0)
@@ -312,7 +313,7 @@ static int nct5104d_gpio_remove(struct platform_device *pdev)
 
 	for (i = 0; i < data->nr_bank; i++) {
 		struct nct5104d_gpio_bank *bank = &data->bank[i];
-		
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3,18,0)
 		int err = gpiochip_remove(&bank->chip);
 		if (err) {
@@ -344,7 +345,8 @@ static int __init nct5104d_find(int addr, struct nct5104d_sio *sio)
 	devid = superio_inw(addr, SIO_CHIPID);
 	switch (devid) {
 	case SIO_NCT5104D_ID:
-	case SIO_PCENGINES_APU_NCT5104D_ID:
+	case SIO_PCENGINES_APU_NCT5104D_ID_B:
+	case SIO_PCENGINES_APU_NCT5104D_ID_C:
 		sio->type = nct5104d;
 		/* enable GPIO0 and GPIO1 */
 		superio_select(addr, SIO_LD_GPIO);
