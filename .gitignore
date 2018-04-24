@@ -5,6 +5,11 @@
 *.so
 *.mod.c
 *.order
+debian/debhelper-build-stamp
+debian/*.log
+debian/*.debhelper
+debian/*.substvars
+debian/gpio-nct5104d-dkms/
 
 !.gitignore
 
