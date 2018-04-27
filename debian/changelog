@@ -1,0 +1,5 @@
+gpio-nct5104d-dkms (0.20171115-0) unstable; urgency=medium
+
+  * Initial package.
+
+ -- PC Engines GmbH <support@pcengines.ch>  Tue, 24 Apr 2018 20:21:22 +0200

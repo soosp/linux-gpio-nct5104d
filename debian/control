@@ -1,0 +1,8 @@
+Source: gpio-nct5104d-dkms
+Maintainer: PC Engines GmbH <support@pcengines.ch>
+Build-Depends: debhelper (>= 9), dkms
+
+Package: gpio-nct5104d-dkms
+Architecture: all
+Depends: ${misc:Depends}
+Description: DKMS source for the NCT5104D GPIO driver

@@ -26,6 +26,34 @@ make KDIR=../linux-4.9.0
 > Kernel has to be prepared first to build the external modules:
 > `make modules_prepare`
 
+## Debian dkms package ##
+
+### Build the package ###
+Install dkms, debhelper and git package on the build machine:
+
+`apt-get install -y dkms debhelper`
+
+Clone this repository:
+
+`git clone <this repo url>`
+
+Run `dpkg-buildpackage` in the driver directory.
+
+### Install the deb package ###
+Install dkms on the target machine:
+
+`apt-get install -y dkms`
+
+Copy the built deb file (e.g. `gpio-nct5104d-dkms_0.20171115-0_all.deb`)
+to the target machine and install it:
+
+```sh
+dpkg -i gpio-nct5104d-dkms_0.20171115-0_all.deb
+```
+
+Now at every kernel package update gpio-nct5104d module will be automatically
+rebuilt and installed.
+
 ## Usage ##
 
 ### Load the driver: ###
