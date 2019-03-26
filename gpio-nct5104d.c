@@ -124,14 +124,14 @@ static int nct5104d_gpio_direction_out(struct gpio_chip *chip,
 				     unsigned offset, int value);
 static void nct5104d_gpio_set(struct gpio_chip *chip, unsigned offset, int value);
 
-#define NCT5104D_GPIO_BANK(_base, _ngpio, _regbase)			\
+#define NCT5104D_GPIO_BANK(_bank, _base, _ngpio, _regbase)		\
 	{								\
 		.chip = {						\
-			.label            = DRVNAME,			\
+			.label            = DRVNAME "-bank" _bank,	\
 			.owner            = THIS_MODULE,		\
 			.direction_input  = nct5104d_gpio_direction_in,	\
 			.get              = nct5104d_gpio_get,		\
-			.direction_output = nct5104d_gpio_direction_out,	\
+			.direction_output = nct5104d_gpio_direction_out,\
 			.set              = nct5104d_gpio_set,		\
 			.base             = _base,			\
 			.ngpio            = _ngpio,			\
@@ -144,8 +144,8 @@ static void nct5104d_gpio_set(struct gpio_chip *chip, unsigned offset, int value
 #define gpio_data(base) (base + 1)
 
 static struct nct5104d_gpio_bank nct5104d_gpio_bank[] = {
-	NCT5104D_GPIO_BANK(0 , 8, 0xE0),
-	NCT5104D_GPIO_BANK(10, 8, 0xE4)
+	NCT5104D_GPIO_BANK("0", 0 , 8, 0xE0),
+	NCT5104D_GPIO_BANK("1", 10, 8, 0xE4)
 };
 
 static int nct5104d_gpio_direction_in(struct gpio_chip *chip, unsigned offset)
