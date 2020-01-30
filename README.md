@@ -81,13 +81,9 @@ unexport all the used GPIO Pins first, then run
 ### Invert GPIO Pin logic: ###
 `echo 1 > /sys/class/gpio/gpio0/active_low`
 
-### Using the Kernel interrupt system for GPIO Pins: ###
-`echo <TRIGGER_TYPE> >/sys/class/gpio/gpio0/edge`
-`TRIGGER_TYPE` can be one of the following values:
-* none
-* falling
-* rising
-* both
+### Interrupts: ###
+
+NCT5104D does not provide interrupts for GPIOs.
 
 ### Show GPIO states using kernel debug information: ###
 `cat /sys/kernel/debug/gpio`
